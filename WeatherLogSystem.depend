@@ -1,0 +1,69 @@
+# depslib dependency file v1.0
+1709215690 source:d:\programming\code blocks\weatherlogsystem\date.cpp
+	"DATE.H"
+
+1709216580 d:\programming\code blocks\weatherlogsystem\date.h
+	<iostream>
+
+1709216363 source:d:\programming\code blocks\weatherlogsystem\time.cpp
+	"Time.h"
+
+1709216601 d:\programming\code blocks\weatherlogsystem\time.h
+	<iostream>
+
+1709216007 source:d:\programming\code blocks\weatherlogsystem\weather.cpp
+	"Weather.h"
+
+1709216630 d:\programming\code blocks\weatherlogsystem\weather.h
+	"Date.h"
+	"Time.h"
+
+1712627738 source:d:\programming\code blocks\weatherlogsystem\vectortest.cpp
+	"Vector.H"
+	<iostream>
+
+1712629087 d:\programming\code blocks\weatherlogsystem\vector.h
+	<iostream>
+	<cmath>
+	<string>
+
+1709216458 source:d:\programming\code blocks\weatherlogsystem\validator.cpp
+	"Validator.h"
+
+1709215915 d:\programming\code blocks\weatherlogsystem\validator.h
+	<regex>
+
+1709217760 source:d:\programming\code blocks\weatherlogsystem\logic.cpp
+	"Logic.h"
+
+1709215740 d:\programming\code blocks\weatherlogsystem\logic.h
+	"Vector.h"
+	"Date.h"
+	"Time.h"
+	"Weather.h"
+	"Validator.h"
+	<iostream>
+	<fstream>
+	<cmath>
+	<string>
+
+1709216323 source:d:\programming\code blocks\weatherlogsystem\logictest.cpp
+	"Logic.h"
+	"Weather.h"
+	<iostream>
+
+1709253601 source:d:\programming\code blocks\weatherlogsystem\main.cpp
+	"Logic.h"
+	"Validator.h"
+	"Date.h"
+	"Time.h"
+	"Weather.h"
+	"Vector.h"
+	<iostream>
+	<fstream>
+	<sstream>
+
+1710036989 source:d:\programming\code blocks\weatherlogsystem\datetest.cpp
+	"Date.h"
+	<iostream>
+

@@ -1,0 +1,726 @@
+Date
+    Private:
+        day: integer
+        month: integer
+        year: integer
+        
+    public:
+    Constructor (no parameters):
+        Initialize day, month, and year to -1
+
+    Constructor (day, month, year):
+        Set day, month, and year to the provided values.
+
+    Destructor:
+        No specific actions needed.
+
+    Methods:
+        GetDay:
+            Return the value of day.
+
+        GetMonth:
+            Return the value of month.
+
+        GetYear:
+            Return the value of year.
+
+        SetDay:
+            Set the value of day to the provided value.
+
+        SetMonth:
+            Set the value of month to the provided value.
+
+        SetYear:
+            Set the value of year to the provided value.
+
+        DisplayFullDate:
+            Return a string in the format "DD/MM/YYYY" using day, month, and year.
+        
+        Overload operator>> for Date:
+            Input day, month, and year from the stream, separated by delimiters.
+            Set the day, month, and year of the Date object accordingly.
+            Return the input stream.
+
+        Overload operator<< for Date:
+            Output the date in "Date: DD/MM/YYYY" format.
+            Return the output stream.
+-------------------------------------------------------------------------------------------------------------
+Time
+    Private:
+        hour: integer
+        minute: integer
+
+    public:
+    Constructor (no parameters):
+        Initialize hour and minute to -1
+
+    Constructor (hour, minute):
+        Set hour and minute to the provided values.
+
+    Destructor:
+        No specific actions needed.
+
+    Methods:
+        GetHour:
+            Return the value of hour.
+
+        GetMinute:
+            Return the value of minute.
+
+        SetHour:
+            Set the value of hour to the provided value.
+
+        SetMinute:
+            Set the value of minute to the provided value.
+
+        Display24HTime:
+            Return a string in the format "HH:MM" using hour and minute.
+
+        Overload operator>> for Time:
+            Input hour and minute from the stream, separated by a delimiter.
+            Set the hour and minute of the Time object accordingly.
+            Return the input stream.
+
+        Overload operator<< for Time:
+            Output the time in "Time: HH:MM" format.
+            Return the output stream.
+-------------------------------------------------------------------------------------------------------------
+Weather
+    Private:
+        date: Date object
+        time: Time object
+        windSpeed: float
+        solarRadiation: float
+        airTemperature: float
+
+    public:
+    Constructor:
+        Initialize windSpeed, solarRadiation, and airTemperature to -1
+
+    Destructor:
+        No specific actions needed.
+
+    Methods:
+        GetDate:
+            Return the date object.
+
+        GetTime:
+            Return the time object.
+
+        GetWindSpeed:
+            Return the windSpeed value.
+
+        GetSolarRadiation:
+            Return the solarRadiation value.
+
+        GetAirTemperature:
+            Return the airTemperature value.
+
+        SetDate:
+            Set the date object to the provided value.
+
+        SetTime:
+            Set the time object to the provided value.
+
+        SetWindSpeed:
+            Set the windSpeed value to the provided value.
+
+        SetSolarRadiation:
+            Set the solarRadiation value to the provided value.
+
+        SetAirTemp:
+            Set the airTemperature value to the provided value.
+-------------------------------------------------------------------------------------------------------------
+Vector 
+    Private:
+        m_pointer: Pointer to T
+        m_size: Unsigned integer
+        m_capacity: Unsigned integer
+
+        Reserve:
+            If the new capacity is not enough, allocate new memory with the new capacity.
+            Deep copy elements from the old memory to the new memory
+            Deallocate old memory and update m_pointer and m_capacity
+        {
+            int newcapacity = PowerOf2(size)
+            if(newcapacity > capacity)
+            {
+                T temp = new T[newcapacity]
+                DeepCopy(pointer, pointer+capacity, temp_pointer)
+                delete the pointer.
+                pointer = temp
+                capacity = newcapacity
+            }
+        }
+
+        PowerOf2:
+            return log2(size) + 1.
+
+        DeepCopy:
+            Copy elements from the source range to the destination range.
+        {
+            while (first!=last) {
+                *result = *first
+                ++result
+                ++first
+            }
+            return result.
+        }
+
+    public:
+    Constructor (no parameters):
+        Initialize m_pointer to NULL, m_size to 0, and m_capacity to 0.
+
+    Constructor (copy from another Vector):
+        Allocate new memory for m_pointer with the capacity of the other Vector.
+        Deep copy elements from the other Vector to this Vector.
+        Set m_size and m_capacity to match the other Vector.
+
+    Destructor:
+        If m_pointer is not NULL, deallocate memory and set m_pointer to NULL.
+        Set m_size and m_capacity to 0.
+
+    Methods:
+        Size:
+            Return m_size.
+
+        Capacity:
+            Return m_capacity.
+
+        Operator =:
+            Allocate new memory for m_pointer with the capacity of the other Vector.
+            Deep copy elements from the other Vector to this Vector.
+            Set m_size and m_capacity to match the other Vector.
+        {
+            int largest
+            if (this.size < other.size)
+            {
+                largest = other.size
+                Reserve(this.size)
+            }
+            else
+            {
+                largest = this.size
+            }
+
+            for(largest)
+            {
+                this[index] = other[index];
+            }
+
+            this.size = other.size
+            return this.
+        }
+
+        Operator []:
+            Return the element at the given index if it is within bounds.
+
+        Resize:
+            If the new size is greater than the current capacity, reserve more capacity.
+            Set m_size to the new size.
+
+        Erase:
+            If the index is valid, shift elements to the left starting from the index and decrement m_size
+        {
+            pointer[index].~T();
+            for (each element in vector)
+            {
+                pointer[index] = pointer[index+1]
+            }
+            --size
+        }
+
+        Insert:
+            If the Vector does not have enough capacity, reserve more capacity.
+            Shift elements to the right starting from the index and insert the new value.
+        {
+            if (capacity <= size)
+            {
+                Reserve(size)
+            }
+            size++;
+            for (each Vector)
+            {
+                pointer[size-1] = pointer[vector-2]
+            }
+            pointer[index] = data
+        }
+
+        Clear:
+            Set m_size to 0.
+
+-------------------------------------------------------------------------------------------------------------
+Validator
+    Public:
+        IsValidDate (day, month, year):
+            Check if year is within a valid range.
+            Check if month is within 1-12
+            Check if day is within a valid range for the given month.
+            If month is February, check if it is a leap year and if the day is valid.
+            If month is April, June, September, or November, check if the day is valid.
+            Return true if all checks pass, false otherwise.
+
+        IsValidDate (month, year):
+            Check if year is within a valid range.
+            Check if month is within 1-12
+            Return true if all checks pass, false otherwise.
+
+        IsValidMonth:
+            Check if month is within 1-12
+            Return true if month is valid, false otherwise.
+
+        IsLeapYear:
+            Check if year is a leap year using the rules for leap years.
+            Return true if year is a leap year, false otherwise.
+
+        IsValid24HourTime:
+            Check if hour is within 0-24 and minute is within 0-59.
+            Return true if both are valid, false otherwise.
+
+        IsNumber:
+            Check if the input string is a valid number, including a decimal point if present.
+            Return true if the string is a valid number, false otherwise.
+
+        IsInteger:
+            Check if the input string is a valid integer, without a decimal point.
+            Return true if the string is a valid integer, false otherwise.
+-------------------------------------------------------------------------------------------------------------
+Logic
+    Public:
+        LoadDataFileCSV:
+            Read data from inputFile and store it in WindLog Vector
+            For each line in the file, split it into components and validate each component.
+            Create Weather objects and add them to WindLog
+        {
+            int recordCount = 0, rowFieldCount =  0, datetimeCount =  0, dateCount =  0, timeCount =  0
+
+            // A temp storage for split string
+            string line, rowField, datetimeField, dateField, timeField
+            // A temp storage for split string
+            Vector<string> columns, splitDateTime, splitDate, splitTime
+
+            Date tempDate
+            Time tempTime
+            Initializes ValidationHelper.
+            Temp storage for Weather object.
+            input string stream for reading and splitting of elements.
+
+            Get and ignore CSV header.
+
+            string columnNames [] = {"WAST", "S", "SR", "T"}
+            int columnIndices [] = {-1, -1, -1, -1}
+
+            istringstream headerStream(line)
+            string columnName
+            int columnIndex = 0
+            while (getl headerStream from columnName with delimiter ',')) {
+                for (loop through all columnName) {
+                    if (columnName == columnNames[i]) {
+                        columnIndices[i] = columnIndex;
+                    break.
+                }
+            }
+        }
+
+        while (Loops for each row of record in file) {
+        
+            if (Checks that line obtained is not empty) {
+                Split a row into its component columns and store in Vector columns.
+            
+                Reset the row field count for each new row.
+                while (get row form rowField with delimiter ',')) {
+                    insert into coloums
+                }
+                clear row
+                if(Skip record if "WAST" column is empty)
+                {
+                    print warning.
+                }
+
+                Split date time column into date and time and store in Vector split Date time
+                while (get datetime from datetimeField with delimiter ' ')) {
+                    inser into datatime.
+                }
+                clear datatime
+
+                Split date into day/month/year and store in a Date object
+                while (get data from data field with delimiter '/’) {
+                    insert into date after removing the leading zeroes.
+                }
+                clear date
+
+                if (validate date is valid) {
+                    Set Day.
+                    Set Month.
+                    Set Year.
+                } else {
+                    print error.
+                    exit form the system.
+                }
+
+                Split time into hours and minute and store them in Time object.
+                while (get time from time field with delimiter ':')) {
+                    insert into time after removing the leading zeroes.
+                }
+                clear time
+
+                if (Validate time is valid) 
+                {
+                    set hour.
+                    set minute.
+                } else {
+                    print error.
+                }
+
+                
+                for (loop through all columnName) 
+                {
+                    Validate and set other fields only if they are not empty.
+                    Only print warning if the field is not empty.
+                }
+
+
+                Insert tempLog into Vector WindLog only if all necessary fields are valid
+                Clear the temp storage vectors.
+                Reset count.
+            }
+        }
+
+        DisplayMenu:
+            Display a menu with options for the user to choose from
+
+        RemoveLeadingZeros:
+            Remove leading zeros from a string and return the result.
+
+        AverageWindSpeedMonth:
+            Calculate the average wind speed for a given month and year in WindLog
+        {
+            float totalWindSpeed;
+            int count
+            for (each WindLogType in array)
+            {
+                If (WindLogType's Date == month AND year)
+                {
+                    count++;
+                    get the total wind speed by adding all the wind speed from wind log.
+                }
+            }
+
+            If (count is equal to zero)
+            {
+                return -1.
+            }
+            else
+            {
+                return totalWindSpeed/count.
+            }
+        }
+
+        AverageAirTemperatureMonth:
+            Calculate the average air temperature for a given month and year in WindLog
+        {
+            float totalAirTemperature
+            int count
+
+            for (each WindLogType in array)
+            {
+            if (WindLogType's Date == month AND year)
+                {
+                    get total air temperature by adding all the air temperature from wind log.
+                }
+            }
+            if (count == 0)
+            {
+                return -1.
+            }
+            else
+            {
+                return totalAirTemperature/count.
+            }
+        }
+
+        SumSolarRadiationMonth:
+            Calculate the total solar radiation for a given month and year in WindLog
+        {
+            float totalSolarRadiation
+
+            for (each WindLogType in array)
+            {
+                If (WindLogType's Date == month AND year)
+                {
+                    If (check the solar radiation is greater than 100)
+                    {
+                       get tolal solar radiation by adding all the solar radiation from wind log.
+                    }
+                }
+            }
+
+            return totalSolarRadiation
+        }
+
+        IntMonthToString:
+            Convert an integer month to a string month.
+        {
+            switch(month)
+            {
+                case 1:
+                    return "January"
+                case 2:
+                    return "February"
+                case 3:
+                    return "March"
+                case 4:
+                    ...
+            }
+        }
+
+        ConvertWindMStoKMH:
+            Convert wind speed from m/s to km/h.
+            multiply wind speed by 3.6.
+
+        ConvertSolarRadiationWMtoKWH:
+            Convert solar radiation from W per 10 min to KiloWattHour
+            multiply solar radiation by 1/6 then divide by 1000.
+
+        StandardDeviationWindSpeedMonth:
+            Calculate the standard deviation of wind speed for a given month and year in WindLog
+        {
+            float totalWindSpeed = 0.0
+            int count = 0
+
+            for (each WindLogType in array) 
+            {
+                if (WindLogType's Date == month AND year) 
+                {
+                    get the total wind speed by adding all the wind speed from wind log;
+                }
+            }
+
+            if (count == 0) 
+            {
+                return -1.
+            } 
+
+            float mean = totalWindSpeed / count
+            float sq_sum = 0.0
+
+            for (each WindLogType in array) 
+            {
+                if (WindLogType's Date == month AND year) 
+                {
+                    float diff = each wind speed - mean
+                    sq_sum += diff * diff
+                }
+            }
+
+            float variance = sq_sum / (count - 1)
+            float stdev = sqrt(variance)
+
+            return round (stdev * 100) /  100
+        }
+
+        StandardDeviationAirTemperatureMonth:
+            Calculate the standard deviation of air temperature for a given month and year in WindLog
+        {
+            float totalAirTemperature = 0.0
+            int count = 0
+
+            for (each WindLogType in array) 
+            {
+                if (WindLogType's Date == month AND year) 
+                {
+                    get total air temperature by adding all the air temperature from wind log.
+                }
+            }
+
+            if (count == 0) 
+            {
+                return -1. 
+            }
+
+            float mean = totalAirTemperature / count.
+            float sq_sum = 0.0.
+
+            for (each WindLogType in array) 
+            {
+                if (WindLogType's Date == month AND year) 
+                {
+                     float diff = each air temperature - mean.
+                     sq_sum += diff * diff.
+                }
+            }
+
+            float variance = sq_sum / (count - 1).
+            float stdev = sqrt(variance).
+
+            return round (stdev * 100) /  100.
+        }
+
+        WriteAppendFile:
+            Append a given string to "WindTempSolar.csv"
+-------------------------------------------------------------------------------------------------------------
+Function main
+    Initialize a Vector named WindLog to store Weather data.
+    Initialize a Logic object named LogicHelp.
+    Initialize a Validator object named Validate.
+
+    Set dataSourceFileName to "data/data_source.txt"
+    Open dataSourceFile with dataSourceFileName
+    If dataSourceFile cannot be opened, display an error message, and exit with a status of 1.
+
+    Read the first line of dataSourceFile into inputFileName
+    Close dataSourceFile
+
+    Set inputFile to open a file named "data/" concatenated with inputFileName
+    If inputFile cannot be opened, display an error message, and exit with a status of 1.
+
+    Call LoadDataFileCSV on LogicHelp with inputFile and WindLog as parameters
+    Close inputFile
+
+    Initialize flag to true and input to an empty string.
+    While flag is true
+        Display the menu to the user.
+        Read the user's input into input.
+        If input is "1"
+            Prompt the user for a month and year, validating the inputs.
+            Calculate and display the average wind speed and standard deviation of wind speed for the specified month and year.
+        {
+            Ask user which month and year they want to search for and validate those input.
+
+            while (cannot validate the month)
+            {
+                print error.
+                Ask user to enter month (1 to 12) again.
+            }
+
+            while (validate the year)
+            {
+                print error.
+                Ask uesr to enter year again.
+            }
+            If (cannot validate month and year)
+            {
+                print error.
+                break.
+            }
+
+            Get Average wind speed and standard deviation of wind speed of that month and year.
+
+            If (month and year don't exist)
+            {
+                print no data.
+            }
+            else
+            {
+                convert wind speed for m/s to km/h.
+                print result.
+            }
+        }
+
+        Else if input is "2".
+            Prompt the user for a year, validating the input.
+            Calculate and display average ambient air temperature and standard deviation of air temperature for each month of the specified year.
+            {
+            Ask user for which year to search and validate the input.
+
+            While (validate the year)
+            {
+                print error. 
+                Ask user to enter year again.
+            }
+
+            print out the year input.
+
+            For (each month in a year)
+            {
+                Get Average ambient air temperature and standard deviation of air temperature of each month.
+
+                If (month and year don't exist)
+                {
+                    print no data.
+                }
+                else
+                {
+                    print result.
+                }
+            }   
+        }
+        Else if input is "3".
+            Prompt the user for a year, validating the input.
+            Calculate and display the total solar radiation for each month of the specified year.
+        {
+            Ask user for which year to search and validate the input.
+
+            While (validate the year)
+            {
+                print error. 
+                Ask user to enter year again.
+            }
+
+            print out the year input.
+
+            For (each month in a year)
+            {
+                add all solar radiation together to find total solar radiation.
+
+                If (month and year don't exist)
+                {
+                    print no data.
+                }
+                else
+                {
+                    convert total solar from wattminute to Kilowatthour
+                    print result.
+                }   
+            }
+        }
+        Else if input is "4".
+            Delete the output file if it exists.
+            Prompt the user for a year, validating the input.
+            Write the year to the output file.
+            Calculate and write the average wind speed, air temperature, and total solar radiation for each month of the specified year to the output file.
+        {
+            Delete the output file if it exists.
+
+            Ask user for which year to search for and validate the input.
+            while (validate the year)
+            {
+                print error.
+                Ask user to enter year again.
+            }
+
+            Write the year onto the output file.
+
+            float averageWind, stdevWind, convertedWind, averageTemp, stdevTemp, totalRadiation, convertedRadiation
+
+            Flag to check if any data is available for the year
+
+            for (each month in a year)
+            {
+
+                Get Average wind speed and standard deviation of wind speed of that month and year.
+                Get Average ambient air temperature and standard deviation of air temperature of that month and year.
+                add all solar radiation together to find total solar radiation.
+
+                If (Check if any data is available for the month)
+                {
+                    Set the flag indicating that there is data for the year
+                    convert wind speed for m/s to km/h.
+                    convert total solar from wattminute to Kilowatthour.
+                    print result.
+                }
+                if(no data was found for the entire year)
+                {
+                    print no data.
+                }
+            }
+
+        Else if input is "5".
+            Set flag to false to exit the loop.
+        Else
+            Display an error message for an unknown command.
+    End While
+
+    Return 0.
+End Function
+-------------------------------------------------------------------------------------------------------------
